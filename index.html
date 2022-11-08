@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.6.1.min.js"></script>
+    <title>Drum Machine</title>
+</head>
+<body>
+
+    <div id="drum-machine">
+        <label id="display">hello</label>
+        <div id="drum-pad">
+            <button class="drum-pad" id="Q">Q
+                <audio class='clip' id="Q" 
+                    src="https://cdn.pixabay.com/audio/2021/11/26/audio_7a01152552.mp3#t=0"></audio>
+            </button>
+            
+            <button class="drum-pad" id="W">W
+                <audio class='clip' id="W" 
+                    src="https://cdn.pixabay.com/audio/2021/12/01/audio_41adb36ba2.mp3"></audio>
+            </button>
+            
+            <button class="drum-pad" id="E">E
+                <audio class="clip" id="E" src="https://cdn.pixabay.com/audio/2021/10/07/audio_2807690af2.mp3"></audio>
+            </button>
+
+            <button class="drum-pad" id="A">A
+                <audio class="clip" id="A" src="https://cdn.pixabay.com/audio/2022/03/15/audio_c0876ca0d2.mp3"></audio>
+            </button>
+            <button class="drum-pad" id="S">S
+                <audio class="clip" id="S" src="https://cdn.pixabay.com/audio/2022/03/10/audio_5ad7ef683d.mp3"></audio>
+            </button>
+            <button class="drum-pad" id="D">D
+                <audio class="clip" id="D" src="https://cdn.pixabay.com/audio/2022/03/10/audio_9fe79df036.mp3"></audio>
+            </button>
+            <button class="drum-pad" id="Z">Z
+                <audio class="clip" id="Z" src="https://cdn.pixabay.com/audio/2022/03/10/audio_e9a93ed562.mp3"></audio>
+            </button>
+            <button class="drum-pad" id="X">X
+                <audio class="clip" id="X" src="https://cdn.pixabay.com/audio/2022/03/10/audio_b48ec6df65.mp3"></audio>
+            </button>
+            <button class="drum-pad" id="C">C
+                <audio class="clip" id="C" src="https://cdn.pixabay.com/audio/2022/03/10/audio_009d2d7411.mp3"></audio>
+            </button>
+        </div>
+    </div>
+    <script>
+
+        function playSound(id,name){
+            console.log(id)
+            if(!$(id).prop('play')){
+                $(id).trigger('play');
+            }else{
+                $(id)[0].currentTime=0
+                $(id).trigger('play');
+            }
+            $('#display').text(name)
+        }
+
+        function playFromButtonId(id){
+            let i = `${id}`
+            i = i.slice(i.length-1)
+            // console.log(i)
+            switch(i.toLowerCase()){
+                case 'q':
+                    playSound(id,'#808-bass')
+                    break;
+                case 'w':
+                    playSound(id,'#808-bass-boom')
+                    break;
+                case 'e':
+                    playSound(id,'#808-kick')
+                    break;
+                case 'a':
+                    playSound(id,'#808-drum')
+                    break;
+                case 's':
+                    playSound(id,'#808-woosh')
+                    break;
+                case 'd':
+                    playSound(id,'#safari-kick')
+                    break;
+                case 'z':
+                    playSound(id,'#bassdum-10')
+                    break;
+                case 'x':
+                    playSound(id,'#random-snare')
+                    break;
+                case 'c':
+                    playSound(id,'#fingered-sax-bass')
+                    break;
+                
+            }
+        }
+
+
+        $('button').click((e)=>{
+            playFromButtonId('audio#'+e.target.id);
+        })
+
+        $('body').keypress((e)=>{
+            playFromButtonId('audio#'+e.key.toUpperCase())
+        })
+
+        
+
+       
+    </script>
+</body>
+</html>
